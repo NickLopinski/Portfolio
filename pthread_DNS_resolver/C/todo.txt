@@ -1,0 +1,30 @@
+Project Part 1 (The Basics):
+	Phase 1: Create a main that checks user input for correctness
+	Phase 2: Create the requester queue
+	Phase 3: Create requester function with single thread functionality
+	Phase 4: Create the resolver queue
+	Phase 5: Create DNS query function (should work for arbitrary number of threads)
+	Phase 6: Create resolver function with single thrad functionality
+
+Project Part 2 (Multi-threading):
+	Phase 7: Add thread creation and assignment to the main function
+	Phase 8: Implement multi threading functionality for the requester function
+	Phase 9: Implement multi threading functionality for the resolver function
+
+project Part 3 (Optional):
+	Phase 10: Add help page and flag
+	Phase 11: Add requester service output file
+	Phase 12: Add print flag option
+	Phase 13: Add functionality for Multiple IP Address output
+
+
+
+
+
+
+Flags
+
+-h: Help page
+-m: Multiple IP Addresses
+-p: Print IP addresses to COUT instead of writing to a file
+-r: Requester service output file
