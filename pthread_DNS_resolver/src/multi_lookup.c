@@ -5,21 +5,53 @@
 #include <string.h>
 #include <unistd.h>
 
-void usage(char* argname)
+void usage(char *argname)
 {
 	fprintf(stderr, "Usage: %s <requester thread count> <resolver thread count> <resolver output file name> <input files>\n", argname);
 	printf("For extra help, use the -h flag\n");
 	exit(1);
 }
 
-int main(int argc, char* argv[])
+void requester(queue *reqQ, queue * resQ)
+{
+	FILE* URLFile;
+	void* payload;
+
+	while(1)
+	{
+		fileName = popQueue(q);
+
+		if(!fileName)
+		{
+			break;
+		}
+
+		fileName = (char*)fileName;
+
+		if(access(fileName, F_OK))
+		{
+			fprintf(stderr, "The input file %s couldn't be read\n", fileName);
+			continue;
+		}
+
+		URLFile = fopen(fileName, 'r');
+
+	}
+}
+
+void resolver(queue *q)
+{
+	// Read the URLs from the resolver queue, perform a DNS query, and write the IPs to the output file
+}
+
+int main(int argc, char *argv[])
 {
 	queue nameFiles;
 	//queue sharedArray;
 
-	char* resOut = NULL;	// Name of resolver output file
+	char *reqOut = NULL, *resOut = NULL;	// Name of resolver output file
 	char input[2] = "\0\0";		// Character for y/n inputs
-	int numReq = 0, numRes = 0, numInFile = 0;	// Number of requester threads, number of resolver threads. number of input files
+	int numReq = 0, numRes = 0, numInFile = 0;	// Requester thread, resolver thread, and input file count
 
 	
 	if(argc < 4)	// Check number of user arguments
@@ -52,9 +84,7 @@ int main(int argc, char* argv[])
 
 	numInFile = argc - 4;	// Should add subtraction of flags later on
 
-	// printf("%d\n", numInFile);
-
-	initQueue(&nameFiles, numInFile, NULL);
+	initQueue(&nameFiles, numInFile, resOut);
 
 	for(int i = argc-numInFile; i < argc; i++)
 	{
