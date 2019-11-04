@@ -12,32 +12,54 @@ void usage(char *argname)
 	exit(1);
 }
 
-void requester(queue *reqQ, queue * resQ)
-{
-	FILE* URLFile;
-	void* payload;
+// void requester(queue *reqQ, queue *resQ)
+// {
+// 	char URL[1024];
 
-	while(1)
-	{
-		fileName = popQueue(q);
+// 	FILE *URLFile = NULL;
+// 	char *payload = NULL;
 
-		if(!fileName)
-		{
-			break;
-		}
+// 	size_t payloadSize = 0;
 
-		fileName = (char*)fileName;
 
-		if(access(fileName, F_OK))
-		{
-			fprintf(stderr, "The input file %s couldn't be read\n", fileName);
-			continue;
-		}
+// 	while(1)
+// 	{
+// 		fileName = popQueue(q);
 
-		URLFile = fopen(fileName, 'r');
+// 		if(!fileName)
+// 		{
+// 			break;
+// 		}
 
-	}
-}
+// 		fileName = (char*)fileName;
+
+// 		URLFile = fopen(fileName, 'r');
+
+// 		if(!URLFile)
+// 		{
+// 			fprintf(stderr, "The input file %s couldn't be read: %s\n", fileName, strerror(errno));
+// 			continue;
+// 		}
+
+// 		while(fgets(URL, sizeof(URL), URLFile))
+// 		{
+// 			payloadSize = sizeof(strlen(URL)+1);
+
+// 			payload = (char*)malloc(payloadSize);
+// 			if(payload == NULL)
+// 			{
+// 				fprintf(stderr, "Error performing malloc for the contents of %s: %s\n", fileName, strerror(errno));
+// 				exit(1);
+// 			}
+ 
+// 			memset(payload, '\0', sizeof(*payload));
+// 			strncpy(payload, URL, payloadSize);
+
+// 			pushQueue(resQ, payload);
+// 		}
+
+// 	}
+// }
 
 void resolver(queue *q)
 {
@@ -84,7 +106,14 @@ int main(int argc, char *argv[])
 
 	numInFile = argc - 4;	// Should add subtraction of flags later on
 
-	initQueue(&nameFiles, numInFile, resOut);
+
+
+	if(!initQueue(&nameFiles, numInFile, resOut))
+	{
+		return 1;
+	}
+
+
 
 	for(int i = argc-numInFile; i < argc; i++)
 	{
