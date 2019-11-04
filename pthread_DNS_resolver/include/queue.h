@@ -6,10 +6,19 @@
 #include <string.h>
 #include <errno.h>
 
-typedef struct queue_s{
-	FILE* logFile;	// Pointer to the output file assigned to the queue
+// typedef struct queue_container_s{
 
-	void** array;	// Array of pointers used for the queue
+// 	queue *requester;
+// 	queue *resolver;
+
+// } queueContainer;
+
+
+
+typedef struct queue_s{
+	FILE *logFile;	// Pointer to the output file assigned to the queue
+
+	void **array;	// Array of pointers used for the queue
 
 	int front, end;	// The front and back queue buffers, respectively
 	int size;	// Length of the array
@@ -31,7 +40,7 @@ typedef struct queue_s{
  *				 This queue structure assumes you will be storing string 
  *				 pointers in the array.
  */
-void initQueue(queue* q, int elemCount, void* fileName);
+void initQueue(queue *q, int elemCount, void *fileName);
 
 
 /*
@@ -43,7 +52,7 @@ void initQueue(queue* q, int elemCount, void* fileName);
  *	Description: Closes the file being held by the struct and frees any memory
  *				 allocated to the array or the struct.
  */
-void destroyQueue(queue* q);
+void destroyQueue(queue *q);
 
 
 /*
@@ -54,7 +63,7 @@ void destroyQueue(queue* q);
  *
  *	Description: Helper function used to check if the queue is empty.
  */
-int isQueueEmpty(queue* q);
+int isQueueEmpty(queue *q);
 
 
 /*
@@ -65,7 +74,7 @@ int isQueueEmpty(queue* q);
  *
  *	Description: Helper function used to check if the queue is full.
  */
-int isQueueFull(queue* q);
+int isQueueFull(queue *q);
 
 
 /*
@@ -76,7 +85,7 @@ int isQueueFull(queue* q);
  *
  *	Description: Removes the value in the first position of the queue.
  */
-void* popQueue(queue* q);
+void* popQueue(queue *q);
 
 
 /*
@@ -89,6 +98,6 @@ void* popQueue(queue* q);
  *
  *	Description: Appends the memory address of a string value to the queue.
  */
-int pushQueue(queue* q, char** address);
+int pushQueue(queue *q, char **address);
 
 #endif
